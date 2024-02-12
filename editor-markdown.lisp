@@ -81,7 +81,7 @@
                   :if-exists :overwrite)
 
 (defparameter *split-line-regexp*
-  (ppcre:create-scanner "((?<=^)|(?<=\\n\\n))([ \\t]*[\\*-]){3,}[ \\t]*(\\n|$)"))
+  (ppcre:create-scanner "((?<=^)|(?<=\\n))([ \\t]*[\\*-]){3,}[ \\t]*(\\n|$)"))
 (editor:make-face 'md-split-line-face
                   :background :grey60
                   :foreground :firebrick
@@ -198,10 +198,10 @@
                    (code-e (svref rs 3)))
               (setf (editor:point-position s) code-s
                     (editor:point-position e) code-e)
-              (editor::remove-text-properties s e '(editor:face nil) :modification nil)
+              (editor:remove-text-properties s e '(editor:face nil) :modification nil)
               (editor::lisp-font-lock-fontify-syntactically-region s e)
               (editor::lisp-font-lock-fontify-keywords-region s e)
-              (editor::alter-text-property s e 'editor:face
+              (editor:alter-text-property s e 'editor:face
                                            #'(lambda (face) (list face 'md-code-block-face))
                                            :modification nil))
             (setf (editor:point-position s) (svref rs 1)
@@ -219,18 +219,18 @@
 (editor::defmode "Markdown"
   :major-p t
   :vars '((editor::font-lock-fontify-syntactically-region-function
-           . fontify-syntactically-region))
-  :setup-function #'(lambda (buffer)
-                      (setf (editor::buffer-font-lock-mode-p buffer) t)
-                      (editor::font-lock-fontify-buffer buffer))
-  :cleanup-function #'(lambda (buffer)
-                      (setf (editor::buffer-font-lock-mode-p buffer) nil)))
+           . fontify-syntactically-region)))
+
+(setf (editor:variable-value 'editor::font-lock-fontify-by-default :mode "Markdown") t)
+
+(editor:add-global-hook editor::markdown-mode-hook #'editor:turn-on-font-lock)
 
 (editor:defcommand "Markdown Mode" (p)
      "Enable Markdown Mode."
      "Enable Markdown Mode."
-  (declare (ignore p))
-  (setf (editor:buffer-major-mode (editor:current-buffer)) "Markdown"))
+  (let ((buffer (editor:current-buffer)))
+    (when (if p (plusp p) (not (equal (editor:buffer-major-mode buffer) "Markdown")))
+      (setf (editor:buffer-major-mode buffer) "Markdown"))))
 
 (editor:define-file-type-hook
     ("md" "markdown")
