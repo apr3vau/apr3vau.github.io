@@ -7,7 +7,10 @@
   (:add-use-defaults))
 (in-package "EDITOR-MARKDOWN")
 
-(ql:quickload :cl-ppcre)
+(unless (find-package 'cl-ppcre)
+  (if (find-package 'quicklisp)
+      (ql:quickload :cl-ppcre)
+    (error "The code needs CL-PPCRE to work, but neither CL-PPCRE nor QUICKLISP found...")))
 
 
 ;;; Easy Custom Settings
