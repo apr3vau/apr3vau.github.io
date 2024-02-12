@@ -20,25 +20,34 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"apr3vau.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="欲寄彩笺兼尺素，山长水阔知何处">
-<meta property="og:type" content="website">
-<meta property="og:title" content="AprCorner">
-<meta property="og:url" content="https://apr3vau.github.io/index.html">
+    <meta name="description" content="Preface  The programming interface of Lispworks Editor is not as easily accessible as Emacs, mostly because its exported symbols are too trivial, most of useful functions and facilities are internal a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Trivial Spreadsheet for modifying Lispworks Editor">
+<meta property="og:url" content="https://apr3vau.github.io/2024/Trivial-Spreadsheet-for-modifying-Lispworks-Editor/index.html">
 <meta property="og:site_name" content="AprCorner">
-<meta property="og:description" content="欲寄彩笺兼尺素，山长水阔知何处">
+<meta property="og:description" content="Preface  The programming interface of Lispworks Editor is not as easily accessible as Emacs, mostly because its exported symbols are too trivial, most of useful functions and facilities are internal a">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://apr3vau.github.io/images/Screenshot%202024-02-12%20113432.png">
+<meta property="og:image" content="https://apr3vau.github.io/images/Screenshot%202024-02-12%20123234.png">
+<meta property="article:published_time" content="2024-02-12T08:45:54.000Z">
+<meta property="article:modified_time" content="2024-02-12T08:45:54.000Z">
 <meta property="article:author" content="April Simone">
+<meta property="article:tag" content="Programming">
+<meta property="article:tag" content="Common Lisp">
+<meta property="article:tag" content="Lispworks">
+<meta property="article:tag" content="Editor">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://apr3vau.github.io/images/Screenshot%202024-02-12%20113432.png">
 
 
-<link rel="canonical" href="https://apr3vau.github.io/">
+<link rel="canonical" href="https://apr3vau.github.io/2024/Trivial-Spreadsheet-for-modifying-Lispworks-Editor/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"en","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://apr3vau.github.io/2024/Trivial-Spreadsheet-for-modifying-Lispworks-Editor/","path":"2024/Trivial-Spreadsheet-for-modifying-Lispworks-Editor/","title":"Trivial Spreadsheet for modifying Lispworks Editor"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>AprCorner</title>
+<title>Trivial Spreadsheet for modifying Lispworks Editor | AprCorner</title>
   
 
 
@@ -71,7 +80,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">AprCorner</h1>
+      <p class="site-title">AprCorner</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">Lisp, Literature, Sister, Trans and Life</p>
@@ -99,7 +108,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -112,6 +121,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Preface"><span class="nav-number">1.</span> <span class="nav-text">Preface</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Topics"><span class="nav-number">2.</span> <span class="nav-text">Topics</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Multi-thread-problem"><span class="nav-number">2.1.</span> <span class="nav-text">Multi-thread problem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Modifying-input"><span class="nav-number">2.2.</span> <span class="nav-text">Modifying input</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Text-properties-the-Way-of-Controlling-Typography"><span class="nav-number">2.3.</span> <span class="nav-text">Text properties, the Way of Controlling Typography</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Font-Lock-Mode"><span class="nav-number">2.4.</span> <span class="nav-text">Font Lock Mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hooks"><span class="nav-number">2.5.</span> <span class="nav-text">Hooks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Buffer-Flags"><span class="nav-number">2.6.</span> <span class="nav-text">Buffer Flags</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Some-Tricks-to-deal-with-Unreasonable-Issues"><span class="nav-number">2.7.</span> <span class="nav-text">Some Tricks to deal with Unreasonable Issues</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -158,16 +168,17 @@
 
     </div>
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="https://apr3vau.github.io/2024/Trivial-Spreadsheet-for-modifying-Lispworks-Editor/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -181,13 +192,13 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | AprCorner">
+      <meta itemprop="name" content="Trivial Spreadsheet for modifying Lispworks Editor | AprCorner">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/Trivial-Spreadsheet-for-modifying-Lispworks-Editor/" class="post-title-link" itemprop="url">Trivial Spreadsheet for modifying Lispworks Editor</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          Trivial Spreadsheet for modifying Lispworks Editor
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -209,8 +220,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h2><p>  The programming interface of Lispworks Editor is not as easily accessible as Emacs, mostly because its exported symbols are too trivial, most of useful functions and facilities are internal and haven’t well-documented. In another side, it’s source codes are solely in Lisp and have plenty of comments, so playing with it is not much difficult. I will write down some experience here that seems haven’t documented well, as a patch for my broken draining memory. Maybe many mistakes, Welcome to correct~</p>
+    <div class="post-body" itemprop="articleBody"><h2 id="Preface"><a href="#Preface" class="headerlink" title="Preface"></a>Preface</h2><p>  The programming interface of Lispworks Editor is not as easily accessible as Emacs, mostly because its exported symbols are too trivial, most of useful functions and facilities are internal and haven’t well-documented. In another side, it’s source codes are solely in Lisp and have plenty of comments, so playing with it is not much difficult. I will write down some experience here that seems haven’t documented well, as a patch for my broken draining memory. Maybe many mistakes, Welcome to correct~</p>
 <h2 id="Topics"><a href="#Topics" class="headerlink" title="Topics"></a>Topics</h2><h3 id="Multi-thread-problem"><a href="#Multi-thread-problem" class="headerlink" title="Multi-thread problem"></a>Multi-thread problem</h3><p>  Every <code>capi:editor</code> instance shares a single standalone editor thread, so calling editor and sharing data&#x2F;status between editor and interface event loop can be difficult. Here are some points:</p>
 <ul>
 <li>On the CAPI side, The <code>gesture-callback</code> of <code>input-model</code>, the <code>before-change-callback</code> and <code>after-change-callback</code> are executed in <em><strong>the Editor Thread</strong></em>, so functions like <code>editor:current-point</code> will work, but modifying the interface should use <code>capi:apply-in-pane-process</code> or something else.</li>
@@ -263,7 +273,6 @@
 <hr>
 <p>  Wish you’re having a wonderful day, eating your favourite dishes, pooping smoothly, and sleeping until naturally wake up ^_^~</p>
 
-      
     </div>
 
     
@@ -271,92 +280,55 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+          <div class="followme">
+  <span>Welcome to my other publishing channels</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://twitter.com/apr_simone">
+            <span class="icon">
+              <i class="fab fa-twitter"></i>
+            </span>
+
+            <span class="label">Twitter</span>
+          </a>
+      </div>
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://t.me/AprCorner">
+            <span class="icon">
+              <i class="fab fa-telegram"></i>
+            </span>
+
+            <span class="label">Telegram</span>
+          </a>
+      </div>
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Programming/" rel="tag"># Programming</a>
+              <a href="/tags/Common-Lisp/" rel="tag"># Common Lisp</a>
+              <a href="/tags/Lispworks/" rel="tag"># Lispworks</a>
+              <a href="/tags/Editor/" rel="tag"># Editor</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/hello-world/" rel="prev" title="Hello World">
+                  <i class="fa fa-angle-left"></i> Hello World
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
     </footer>
   </article>
 </div>
 
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://apr3vau.github.io/2024/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/favicon.jpg">
-      <meta itemprop="name" content="April Simone">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="AprCorner">
-      <meta itemprop="description" content="欲寄彩笺兼尺素，山长水阔知何处">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | AprCorner">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2024-02-11 20:22:12" itemprop="dateCreated datePublished" datetime="2024-02-11T20:22:12+01:00">2024-02-11</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
 
 
 
