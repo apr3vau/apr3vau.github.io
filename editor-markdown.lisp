@@ -1,7 +1,8 @@
 ;;; Copyright (c) 2024, April Simone
 ;;; SPDX-License-Identifier: BSD-2-Clause-Patent
 
-;;; Usage: Load this file.
+;;; Dependencies: CL-PPCRE
+;;; Usage:        Set the Configures and load this file.
 
 (defpackage editor-markdown
   (:add-use-defaults))
@@ -13,7 +14,7 @@
     (error "The code needs CL-PPCRE to work, but neither CL-PPCRE nor QUICKLISP found...")))
 
 
-;;; Easy Custom Settings
+;;; Configurations
 
 (defparameter *sans-serif-font-family-name*
   "Sarasa UI SC")
