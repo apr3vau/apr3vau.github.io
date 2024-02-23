@@ -20,27 +20,31 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"apr3vau.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+    <meta name="description" content="Lispworks’ manual said non-focus window is some kind of window thatnot taking focus, but in fact any interface can work without focusanyway :)… I just treat it as a way to raise windows withoutsystem’">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://apr3vau.github.io/2024/hello-world/index.html">
+<meta property="og:title" content="Using Non-Focus Interface in CAPI">
+<meta property="og:url" content="https://apr3vau.github.io/2024/Using-Non-Focus-Interface-in-CAPI/index.html">
 <meta property="og:site_name" content="AprCorner">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="Lispworks’ manual said non-focus window is some kind of window thatnot taking focus, but in fact any interface can work without focusanyway :)… I just treat it as a way to raise windows withoutsystem’">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2024-02-11T19:22:12.851Z">
-<meta property="article:modified_time" content="2024-02-11T19:22:12.851Z">
+<meta property="article:published_time" content="2024-02-23T04:07:41.000Z">
+<meta property="article:modified_time" content="2024-02-23T04:07:41.000Z">
 <meta property="article:author" content="April Simone">
+<meta property="article:tag" content="Programming">
+<meta property="article:tag" content="Common Lisp">
+<meta property="article:tag" content="Lispworks">
+<meta property="article:tag" content="GUI">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://apr3vau.github.io/2024/hello-world/">
+<link rel="canonical" href="https://apr3vau.github.io/2024/Using-Non-Focus-Interface-in-CAPI/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://apr3vau.github.io/2024/hello-world/","path":"2024/hello-world/","title":"Hello World"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://apr3vau.github.io/2024/Using-Non-Focus-Interface-in-CAPI/","path":"2024/Using-Non-Focus-Interface-in-CAPI/","title":"Using Non-Focus Interface in CAPI"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Hello World | AprCorner</title>
+<title>Using Non-Focus Interface in CAPI | AprCorner</title>
   
 
 
@@ -101,7 +105,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -114,7 +118,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -172,7 +175,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://apr3vau.github.io/2024/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://apr3vau.github.io/2024/Using-Non-Focus-Interface-in-CAPI/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/favicon.jpg">
@@ -185,12 +188,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Hello World | AprCorner">
+      <meta itemprop="name" content="Using Non-Focus Interface in CAPI | AprCorner">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          Using Non-Focus Interface in CAPI
         </h1>
 
         <div class="post-meta-container">
@@ -201,7 +204,7 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2024-02-11 20:22:12" itemprop="dateCreated datePublished" datetime="2024-02-11T20:22:12+01:00">2024-02-11</time>
+      <time title="Created: 2024-02-23 05:07:41" itemprop="dateCreated datePublished" datetime="2024-02-23T05:07:41+01:00">2024-02-23</time>
     </span>
 
   
@@ -213,19 +216,14 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+    <div class="post-body" itemprop="articleBody"><p>Lispworks’ manual said non-focus window is some kind of window that<br>not taking focus, but in fact any interface can work without focus<br>anyway :)… I just treat it as a way to raise windows without<br>system’s decorations like border &amp; action buttons. We will get it done<br>using floating divs in web-based UI, but they usually have some<br>limitations like not support to display out of the DOM, and such a<br>native window can hold these situation very well. That’s the advantage<br>of native framework.</p>
+<p>LW has exported 2 interface to raise non-focus window, one is<br><code>capi:prompt-with-list-non-focus</code>, to raise a list panel, and another<br>is <code>capi:display-non-focus-message</code>, to raise a display pane with<br>certain string. Besides these two types, there is an internal<br><code>capi::display-non-focus-editor-pane</code> can be used - although lacking<br>in arglist description, but can still work with those known arguments<br>from other two functions. The non-focus editor pane is exactly what<br>have been used in the <code>Function Arglist Displayer</code>.</p>
+<p>And, we can raise an arbitrary interface by directly instanciate a<br><code>capi::non-focus-interface</code>. Two initargs <code>:previous-x</code> and<br><code>:previous-y</code> are necessary as the relative position of its owner. The<br><code>gesture-callbacks</code> should be used for<br><code>capi:non-focus-maybe-capture-gesture</code>. Interface arguments like window-styles can be used to make more precise effects.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(capi:display</span><br><span class="line"> (make-instance &#x27;capi::non-focus-interface</span><br><span class="line">                :window-styles &#x27;(:borderless)</span><br><span class="line">                :layout (make-instance</span><br><span class="line">                         &#x27;capi:column-layout</span><br><span class="line">                         :description</span><br><span class="line">                         (list (make-instance &#x27;capi:display-pane</span><br><span class="line">                                              :text &quot;test&quot;)))</span><br><span class="line">                :previous-x 0 :previous-y 0)</span><br><span class="line"> :owner (editor:window-text-pane (editor:current-window)))</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p>The documented way to update items in <code>non-focus-list-interface</code> is<br>using <code>list-updater</code>, this function should return new items or<br><code>destroy</code>, and the interface will be repositioned and resized to fit<br>its children using its <code>positioning-function</code>. It’s a undocumented<br>keyword for all of those raising functions. CAPI have given an default<br>one of this slot, so we can know this function should take the<br>interface itself, then directly move it, with no return value<br>(probably). But we can also set the top-level interface geometries of<br>the interface directly.  Sometimes the coordinates need to be<br>converted from the screen to the owner, and<br><code>capi:convert-relative-position</code> can be used.</p>
+<p>Sometimes there are still some effect not satisfy our needs, like the<br>selection of <code>non-focus-list-interface</code> will be reset after items<br>update. Directly accessing the components using<br><code>capi::non-focus-interface-list-panel</code> etc. can be used to achieve<br>complex manipulates.</p>
+<p>The redisplay of <code>non-focus-interface</code> have been forced to happen in<br>the owner’s process, and this may cause annoying laggings of UI<br>process sometimes. I will just start a thread to prepare all datas<br>needed, then calling for GUI update using <code>apply-in-pane-process</code>.<br>Sometimes it’s still useless when we raise&#x2F;move window rapidly, and<br>the native handler itself is laggy enough though. Attaching the<br>non-focus interface to a standalone process may works.</p>
 
     </div>
 
@@ -261,16 +259,22 @@
   </div>
 </div>
 
+          <div class="post-tags">
+              <a href="/tags/Programming/" rel="tag"># Programming</a>
+              <a href="/tags/Common-Lisp/" rel="tag"># Common Lisp</a>
+              <a href="/tags/Lispworks/" rel="tag"># Lispworks</a>
+              <a href="/tags/GUI/" rel="tag"># GUI</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/2024/Trivial-Spreadsheet-for-modifying-Lispworks-Editor/" rel="prev" title="Trivial Spreadsheet for modifying Lispworks Editor">
+                  <i class="fa fa-angle-left"></i> Trivial Spreadsheet for modifying Lispworks Editor
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2024/Trivial-Spreadsheet-for-modifying-Lispworks-Editor/" rel="next" title="Trivial Spreadsheet for modifying Lispworks Editor">
-                  Trivial Spreadsheet for modifying Lispworks Editor <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>

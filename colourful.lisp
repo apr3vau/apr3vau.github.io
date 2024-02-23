@@ -51,7 +51,7 @@
                   :foreground (editor::create-dark-background-switchable-color :orchid :pink)
                   :if-exists :overwrite)
 (editor:make-face 'editor::font-lock-type-face
-                  :italic-p t
+                  :font *mono-bold-italic-font*
                   :foreground (editor::create-dark-background-switchable-color :forestgreen :yellow)
                   :if-exists :overwrite)
 (editor:make-face 'editor::font-lock-function-name-face
@@ -64,7 +64,7 @@
                   :background :light-red
                   :if-exists :overwrite)
 (editor:make-face 'editor::font-lock-keyword-face
-                  :font *mono-bold-italic-font*
+                  :bold-p t
                   :foreground :purple
                   :if-exists :overwrite)
 (editor:make-face 'editor::font-lock-string-face
