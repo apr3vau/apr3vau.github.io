@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.28/fancybox/fancybox.css" integrity="sha256-6cQIC71/iBIYXFK+0RHAvwmjwWzkWd+r7v/BX3/vZDc=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"apr3vau.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"apr3vau.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.19.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="Lispworks’ manual said non-focus window is some kind of window that not taking focus, but in fact any interface can work without focus anyway :)… I just treat it as a way to raise windows without syst">
 <meta property="og:type" content="article">
@@ -30,8 +30,8 @@
 <meta property="article:published_time" content="2024-02-23T04:07:41.000Z">
 <meta property="article:modified_time" content="2024-02-23T04:07:41.000Z">
 <meta property="article:author" content="April Simone">
-<meta property="article:tag" content="Programming">
 <meta property="article:tag" content="Common Lisp">
+<meta property="article:tag" content="Programming">
 <meta property="article:tag" content="Lispworks">
 <meta property="article:tag" content="GUI">
 <meta name="twitter:card" content="summary">
@@ -137,7 +137,7 @@
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -219,7 +219,16 @@
     <div class="post-body" itemprop="articleBody"><p>Lispworks’ manual said non-focus window is some kind of window that not taking focus, but in fact any interface can work without focus anyway :)… I just treat it as a way to raise windows without system’s decorations like border &amp; action buttons. We will get it done using floating divs in web-based UI, but they usually have some limitations like not support to display out of the DOM, and such a native window can hold these situation very well. That’s the advantage of native framework.</p>
 <p>LW has exported 2 interface to raise non-focus window, one is <code>capi:prompt-with-list-non-focus</code>, to raise a list panel, and another is <code>capi:display-non-focus-message</code>, to raise a display pane with certain string. Besides these two types, there is an internal <code>capi::display-non-focus-editor-pane</code> can be used - although lacking in arglist description, but can still work with those known arguments from other two functions. The non-focus editor pane is exactly what have been used in the <code>Function Arglist Displayer</code>.</p>
 <p>And, we can raise an arbitrary interface by directly instanciate a <code>capi::non-focus-interface</code>. Two initargs <code>:previous-x</code> and <code>:previous-y</code> are necessary as the relative position of its owner. The <code>gesture-callbacks</code> should be used for <code>capi:non-focus-maybe-capture-gesture</code>. Interface arguments like window-styles can be used to make more precise effects.</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">capi</span><span class="symbol">:display</span></span><br><span class="line"> (<span class="name">make-instance</span> &#x27;capi:<span class="symbol">:non-focus-interface</span></span><br><span class="line">                <span class="symbol">:window-styles</span> &#x27;(<span class="symbol">:borderless</span>)</span><br><span class="line">                <span class="symbol">:layout</span> (<span class="name">make-instance</span></span><br><span class="line">                         &#x27;capi<span class="symbol">:column-layout</span></span><br><span class="line">                         <span class="symbol">:description</span></span><br><span class="line">                         (<span class="name">list</span> (<span class="name">make-instance</span> &#x27;capi<span class="symbol">:display-pane</span></span><br><span class="line">                                              <span class="symbol">:text</span> <span class="string">&quot;test&quot;</span>)))</span><br><span class="line">                <span class="symbol">:previous-x</span> <span class="number">0</span> <span class="symbol">:previous-y</span> <span class="number">0</span>)</span><br><span class="line"> <span class="symbol">:owner</span> (<span class="name">editor</span><span class="symbol">:window-text-pane</span> (<span class="name">editor</span><span class="symbol">:current-window</span>)))</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-lisp" data-language="lisp"><code class="language-lisp"><span class="token punctuation">(</span><span class="token car">capi</span><span class="token lisp-property property">:display</span>
+ <span class="token punctuation">(</span><span class="token car">make-instance</span> <span class="token quoted-symbol variable symbol">'capi</span>:<span class="token lisp-property property">:non-focus-interface</span>
+                <span class="token lisp-property property">:window-styles</span> <span class="token punctuation">'(</span><span class="token lisp-property property">:borderless</span><span class="token punctuation">)</span>
+                <span class="token lisp-property property">:layout</span> <span class="token punctuation">(</span><span class="token car">make-instance</span>
+                         <span class="token quoted-symbol variable symbol">'capi</span><span class="token lisp-property property">:column-layout</span>
+                         <span class="token lisp-property property">:description</span>
+                         <span class="token punctuation">(</span><span class="token car">list</span> <span class="token punctuation">(</span><span class="token car">make-instance</span> <span class="token quoted-symbol variable symbol">'capi</span><span class="token lisp-property property">:display-pane</span>
+                                              <span class="token lisp-property property">:text</span> <span class="token string">"test"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                <span class="token lisp-property property">:previous-x</span> <span class="token number">0</span> <span class="token lisp-property property">:previous-y</span> <span class="token number">0</span><span class="token punctuation">)</span>
+ <span class="token lisp-property property">:owner</span> <span class="token punctuation">(</span><span class="token car">editor</span><span class="token lisp-property property">:window-text-pane</span> <span class="token punctuation">(</span><span class="token car">editor</span><span class="token lisp-property property">:current-window</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>The documented way to update items in <code>non-focus-list-interface</code> is using <code>list-updater</code>, this function should return new items or <code>destroy</code>, and the interface will be repositioned and resized to fit its children using its <code>positioning-function</code>. It’s a undocumented keyword for all of those raising functions. CAPI have given an default one of this slot, so we can know this function should take the interface itself, then directly move it, with no return value (probably). But we can also set the top-level interface geometries of the interface directly.  Sometimes the coordinates need to be converted from the screen to the owner, and <code>capi:convert-relative-position</code> can be used.</p>
 <p>Sometimes there are still some effect not satisfy our needs, like the selection of <code>non-focus-list-interface</code> will be reset after items update. Directly accessing the components using <code>capi::non-focus-interface-list-panel</code> etc. can be used to achieve complex manipulates.</p>
@@ -260,8 +269,8 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/Programming/" rel="tag"># Programming</a>
               <a href="/tags/Common-Lisp/" rel="tag"># Common Lisp</a>
+              <a href="/tags/Programming/" rel="tag"># Programming</a>
               <a href="/tags/Lispworks/" rel="tag"># Lispworks</a>
               <a href="/tags/GUI/" rel="tag"># GUI</a>
           </div>
