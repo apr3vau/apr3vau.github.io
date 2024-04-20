@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>
+    AprCorner</title>
+  <subtitle>
+    Lisp, Literature, Sister, Trans and Life</subtitle>
+  <icon>
+    https://apr3vau.github.io/images/favicon.png</icon>
+  <link href="https://apr3vau.github.io/atom.xml" rel="self"/>
+  <link href="https://apr3vau.github.io/"/>
+  <updated>
+    2024-04-20T18:19:34.220493Z</updated>
+  <id>
+    https://apr3vau.github.io/</id>
+  <author>
+    <name>
+      April Simone</name>
+  </author>
+  <entry>
+    <title>
+      A Trivial Method To Render Material Icons in CAPI</title>
+    <link href="https://apr3vau.github.io/A_Trivial_Method_To_Render_Material_Icons_in_CAPI.html"/>
+    <id>
+      https://apr3vau.github.io/A_Trivial_Method_To_Render_Material_Icons_in_CAPI.html</id>
+    <published>
+      2024-04-11T12:02:21.000000Z</published>
+    <updated>
+      2024-04-20T01:57:24.000000Z</updated>
+    <summary>
+      The Lispworks toolset and whole Common Lisp economy is lacking a way to
+      render SVG in a standalone and reliable way, and there's also not a exist
+      binding for libraries such as librsvg. To easily access some useful SVG
+      resources, I once tried to write some codes aiming to translate SVG Paths
+      to Li...</summary>
+  </entry>
+  <entry>
+    <title>
+      Interpreting Hex Colors</title>
+    <link href="https://apr3vau.github.io/Interpreting-Hex-Colors.html"/>
+    <id>
+      https://apr3vau.github.io/Interpreting-Hex-Colors.html</id>
+    <published>
+      2024-03-09T22:36:18.000000Z</published>
+    <updated>
+      2024-04-20T02:54:47.000000Z</updated>
+    <summary>
+      I usually have to convert hex code to Lispworks' color-spec. And here's
+      some interesting ways to separate color components from hex code in Lisp.
+      Assuming we have hex string like `"#AABBCCDD"` or `#ABCD`, to collect its
+      `r, g, b, a` and convert them to single-float in range `0-1`: ### Parsing
+      E...</summary>
+  </entry>
+  <entry>
+    <title>
+      TDoV 2024</title>
+    <link href="https://apr3vau.github.io/TDoV-2024.html"/>
+    <id>
+      https://apr3vau.github.io/TDoV-2024.html</id>
+    <published>
+      2024-03-31T12:56:17.000000Z</published>
+    <updated>
+      2024-04-20T01:57:18.000000Z</updated>
+    <summary>
+      Happy Transgender Day of Visibility!~ Being a Chinese transgirl for year
+      and half, I'm here, in proud and firm, for all of you. ![Happy
+      TDoV!](/images/tdov.jpg) [Code Here](/trans.pdf)</summary>
+  </entry>
+  <entry>
+    <title>
+      Trivial Spreadsheet for modifying Lispworks Editor</title>
+    <link href="https://apr3vau.github.io/Trivial-Spreadsheet-for-modifying-Lispworks-Editor.html"/>
+    <id>
+      https://apr3vau.github.io/Trivial-Spreadsheet-for-modifying-Lispworks-Editor.html</id>
+    <published>
+      2024-02-12T09:45:54.000000Z</published>
+    <updated>
+      2024-04-20T01:57:09.000000Z</updated>
+    <summary>
+      ## Preface The programming interface of Lispworks Editor is not as easily
+      accessible as Emacs, mostly because its exported symbols are too trivial,
+      most of useful functions and facilities are internal and haven't
+      well-documented. In another side, it's source codes are solely in Lisp
+      and have p...</summary>
+  </entry>
+  <entry>
+    <title>
+      Using Non-Focus Interface in CAPI</title>
+    <link href="https://apr3vau.github.io/Using-Non-Focus-Interface-in-CAPI.html"/>
+    <id>
+      https://apr3vau.github.io/Using-Non-Focus-Interface-in-CAPI.html</id>
+    <published>
+      2024-02-23T05:07:41.000000Z</published>
+    <updated>
+      2024-04-20T02:46:18.000000Z</updated>
+    <summary>
+      Lispworks' manual said non-focus window is some kind of window that not
+      taking focus, but in fact any interface can work without focus anyway
+      :)... I just treat it as a way to raise windows without system's
+      decorations like border &amp; action buttons. We will get it done using
+      floating divs in web-b...</summary>
+  </entry>
+</feed>

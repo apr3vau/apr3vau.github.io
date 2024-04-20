@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <style>
+     pre {
+       text-wrap: wrap;
+     }
+     img {
+       width: 100%; height: 100%;
+       object-fit: contain;
+     }
+     .main {
+       max-width: min(max(75vw, 1200px), 100vw);
+       display: flex;
+       flex-flow: row-reverse wrap;
+       margin-left: auto;
+       margin-right: auto;
+       padding: 1em;
+     }
+     .content {
+       flex: 1 1;
+       overflow-y: auto;
+       max-height: calc(100vh - 3em);
+     }
+     .sidebar {
+       flex: 0 1 auto;
+       margin-right: 1em;
+     }
+     .logo {
+       width: 75%;
+       aspect-ratio: 1 / 1;
+       margin: auto;
+       margin-top: 1em;
+       background-repeat: no-repeat;
+       background-size: contain;
+       background-image: url('/images/favicon.png');
+     }
+     .postblock-outer {
+       padding: 1em;
+       margin-bottom: 1em;
+       background-color: #FFFFFF;
+     }
+     .postblock {
+       padding: 1em;
+       border-top: medium solid #000000;
+       border-bottom: medium solid #000000;
+     }
+     .post-title {
+       font-family: Georgia, 'Times New Roman', Times, serif;
+       font-size: x-large;
+       font-weight: bold;
+       font-style: italic;
+       margin: 0px;
+     }
+     .post-title-line {
+       display: flex;
+       flex-flow: row wrap;
+       align-items: flex-end;
+       justify-content: space-between;
+     }
+     .post-tag {
+       margin: 1em;
+       color: #5A5A5A;
+       font-size: medium;
+     }
+     .post-content {
+       margin: 1em 0em;
+       padding: 1em 0em;
+       border-top: thin solid #5A5A5A;
+       border-bottom: thin solid #5A5A5A;
+       min-width: 100%;
+       font-family: 'Times New Roman', Times, serif;
+     }
+     .author-block {
+       text-align: center;
+       padding: 1em;
+       font-family: 'Times New Roman', Times, serif;
+       background-color: #5A5A5A;
+       color: #FFFFFF;
+     }
+     .navbar {
+       padding: 1em;
+       margin-bottom: 1em;
+       position: sticky;
+       top: 0px;
+       display: flex;
+       flex-flow: row wrap;
+       justify-content: space-evenly;
+       font-family: Georgia, 'Times New Roman', Times, serif;
+       font-style: italic;
+       font-size: large;
+       border-top: medium solid #5A5A5A;
+       border-bottom: medium solid #5A5A5A;
+       background-color: #FFFFFF;
+     }
+     .navbar-item {
+       color: #000000;
+     }
+    </style>
+  </head>
+
+  <body style="background-color: #EEEEEE; color: #000000;">
+    <div class="main">
+
+      <div class="content">
+        <div class="navbar">
+          
+          <a class="navbar-item" href="/">Home</a>
+          <a class="navbar-item" href="/tags.html">Tags</a>
+          <a class="navbar-item" href="/atom.xml">RSS</a>
+          
+          
+        </div>
+        
+<div class="postblock-outer">
+    <div class="postblock">
+        <div class="post-title-line">
+            <h2 id="Interpreting Hex Colors" class="post-title">
+              <a href="/Interpreting-Hex-Colors.html" style="color: #000000;">Interpreting Hex Colors</a>
+            </h2>
+            <div style="padding-top: 1em;">
+                
+                <a class="post-tag" href="/tag/Programming">Programming</a>
+                
+                <a class="post-tag" href="/tag/Common Lisp">Common Lisp</a>
+                
+            </div>
+        </div>
+        <div class="post-content">
+            <p>I usually have to convert hex code to Lispworks' color-spec. And here's some interesting ways to separate color components from hex code in Lisp.</p>
+
+<p>Assuming we have hex string like <code>&quot;#AABBCCDD&quot;</code> or <code>#ABCD</code>, to collect its <code>r, g, b, a</code> and convert them to single-float in range <code>0-1</code>:</p>
+
+<h3>Parsing Each Byte</h3>
+
+<p>Parsing hex numbers in string maybe the most straightest. One way is to use <code>parse-integer</code> on each part of the code like this:</p>
+
+<pre><code><span class="code"><span class="paren1">(<span class="code">parse-integer <span class="paren2">(<span class="code">subseq str i <span class="paren3">(<span class="code">1+ i</span>)</span></span>)</span> <span class="keyword">:radix</span> 16</span>)</span></span></code></pre>
+
+<p>But if you prefer a way more &quot;lisper&quot;, you can also use <code>read</code> instead of <code>parse-integer</code>. This may be more flexible:</p>
+
+<pre><code><span class="code"><span class="paren1">(<span class="code"><i><span class="symbol">let</span></i> <span class="paren2">(<span class="code"><span class="paren3">(<span class="code"><span class="special">*read-base*</span> 16</span>)</span></span>)</span>
+  <span class="paren2">(<span class="code">read-from-string <span class="paren3">(<span class="code">subseq str <span class="paren4">(<span class="code">1- i</span>)</span> i</span>)</span></span>)</span></span>)</span></span></code></pre>
+
+<p>To split out substrings, we can use <code>subseq</code> with an arithmatic loop; and with <code>string-trim</code> to cut off junks:</p>
+
+<pre><code><span class="code"><span class="paren1">(<span class="code"><i><span class="symbol">loop</span></i> with str = <span class="paren2">(<span class="code">string-trim '<span class="paren3">(<span class="code"><span class="character">#\#</span> <span class="character">#\Space</span></span>)</span> hex</span>)</span>
+      for i from 0 below <span class="paren2">(<span class="code">length str</span>)</span> by 2
+      collect <span class="paren2">(<span class="code">parse-integer <span class="paren3">(<span class="code">subseq str i <span class="paren4">(<span class="code">1+ i</span>)</span></span>)</span> <span class="keyword">:radix</span> 16</span>)</span></span>)</span></span></code></pre>
+
+<p>Now we have collected a list, but it can be annoying to manually re-order them. We can take a few changes to our loop keywords to adjust the list, using <code>downfrom</code> and <code>above</code>; and, it's more convenient to use <code>destructuring-bind</code> here, which can apply the versatile <code>Ordinary Lambda List</code> facility:</p>
+
+<pre><code><span class="code"><span class="paren1">(<span class="code">destructuring-bind <span class="paren2">(<span class="code">b g r &amp;optional <span class="paren3">(<span class="code">a 0</span>)</span></span>)</span>
+    <span class="paren2">(<span class="code"><i><span class="symbol">loop</span></i> with str = <span class="paren3">(<span class="code">string-trim '<span class="paren4">(<span class="code"><span class="character">#\#</span> <span class="character">#\Space</span></span>)</span> hex</span>)</span>
+          for i downfrom <span class="paren3">(<span class="code">1- <span class="paren4">(<span class="code">length str</span>)</span></span>)</span> above 0 by 2
+          collect <span class="paren3">(<span class="code">parse-integer <span class="paren4">(<span class="code">subseq str i <span class="paren5">(<span class="code">1+ i</span>)</span></span>)</span> <span class="keyword">:radix</span> 16</span>)</span></span>)</span>
+  <span class="paren2">(<span class="code"></span>)</span></span>)</span></span></code></pre>
+
+<p>There's two types of Hex color expression: One is <code>(unsigned-byte 8)</code> of each unit and has a deno of 255, another is <code>(unsigned-byte 4)</code> and has a deno of 15. We can distinct them by their length:</p>
+
+<pre><code><span class="code"><span class="paren1">(<span class="code">destructuring-bind <span class="paren2">(<span class="code">b g r &amp;optional <span class="paren3">(<span class="code">a 0</span>)</span></span>)</span>
+    <span class="paren2">(<span class="code"><i><span class="symbol">loop</span></i> with str = <span class="paren3">(<span class="code">string-trim '<span class="paren4">(<span class="code"><span class="character">#\#</span> <span class="character">#\Space</span></span>)</span> hex</span>)</span>
+          with deno = <span class="paren3">(<span class="code"><i><span class="symbol">if</span></i> <span class="paren4">(<span class="code">&gt; <span class="paren5">(<span class="code">length str</span>)</span> 4</span>)</span> 255 16</span>)</span>
+          for i downfrom <span class="paren3">(<span class="code">1- <span class="paren4">(<span class="code">length str</span>)</span></span>)</span> above 0 by 2
+          collect <span class="paren3">(<span class="code">/ <span class="paren4">(<span class="code">float <span class="paren5">(<span class="code">parse-integer <span class="paren6">(<span class="code">subseq str i <span class="paren1">(<span class="code">1+ i</span>)</span></span>)</span> <span class="keyword">:radix</span> 16</span>)</span></span>)</span>
+                     deno</span>)</span></span>)</span>
+  <span class="paren2">(<span class="code"></span>)</span></span>)</span></span></code></pre>
+
+<p>Finally we can encapsulate the code into function, for example if I need a Lispworks' <code>color:color-spec</code>:</p>
+
+<pre><code><span class="code"><span class="paren1">(<span class="code"><i><span class="symbol">defun</span></i> hex-to-spec <span class="paren2">(<span class="code">hex</span>)</span>
+  <span class="paren2">(<span class="code">destructuring-bind <span class="paren3">(<span class="code">b g r &amp;optional <span class="paren4">(<span class="code">a 0</span>)</span></span>)</span>
+      <span class="paren3">(<span class="code"><i><span class="symbol">loop</span></i> with str = <span class="paren4">(<span class="code">string-trim '<span class="paren5">(<span class="code"><span class="character">#\#</span> <span class="character">#\Space</span></span>)</span> hex</span>)</span>
+            with deno = <span class="paren4">(<span class="code"><i><span class="symbol">if</span></i> <span class="paren5">(<span class="code">&gt; <span class="paren6">(<span class="code">length str</span>)</span> 4</span>)</span> 255 16</span>)</span>
+            for i downfrom <span class="paren4">(<span class="code">1- <span class="paren5">(<span class="code">length str</span>)</span></span>)</span> above 0 by 2
+            collect <span class="paren4">(<span class="code">/ <span class="paren5">(<span class="code">float <span class="paren6">(<span class="code">parse-integer <span class="paren1">(<span class="code">subseq str i <span class="paren2">(<span class="code">1+ i</span>)</span></span>)</span> <span class="keyword">:radix</span> 16</span>)</span></span>)</span>
+                       deno</span>)</span></span>)</span>
+    <span class="paren3">(<span class="code">color:make-rgb r g b <span class="paren4">(<span class="code">+ <span class="paren5">(<span class="code">- a</span>)</span> 1</span>)</span></span>)</span></span>)</span></span>)</span></span></code></pre>
+
+<h3>Byte Shifting</h3>
+
+<p>There's another choice of using byte-shifting instead of apply <code>parse-integer</code> on each part. It maybe more effective, but we need slightly longer code:</p>
+
+<pre><code><span class="code"><span class="paren1">(<span class="code"><i><span class="symbol">defun</span></i> hex-to-spec <span class="paren2">(<span class="code">hex</span>)</span>
+  <span class="paren2">(<span class="code"><i><span class="symbol">let*</span></i> <span class="paren3">(<span class="code"><span class="paren4">(<span class="code">str <span class="paren5">(<span class="code">string-trim '<span class="paren6">(<span class="code"><span class="character">#\#</span> <span class="character">#\Space</span></span>)</span> hex</span>)</span></span>)</span>
+         <span class="paren4">(<span class="code">hex-val <span class="paren5">(<span class="code">parse-integer str <span class="keyword">:radix</span> 16</span>)</span></span>)</span>
+         <span class="paren4">(<span class="code">deno <span class="paren5">(<span class="code"><i><span class="symbol">if</span></i> <span class="paren6">(<span class="code">&gt; <span class="paren1">(<span class="code">length str</span>)</span> 4</span>)</span> 255 15</span>)</span></span>)</span>
+         <span class="paren4">(<span class="code">shift <span class="paren5">(<span class="code">logcount deno</span>)</span></span>)</span></span>)</span>
+    <span class="paren3">(<span class="code"><i><span class="symbol">let</span></i> <span class="paren4">(<span class="code"><span class="paren5">(<span class="code">b <span class="paren6">(<span class="code">logand hex-val deno</span>)</span></span>)</span>
+          <span class="paren5">(<span class="code">g <span class="paren6">(<span class="code">ash <span class="paren1">(<span class="code">logand hex-val <span class="paren2">(<span class="code">ash deno shift</span>)</span></span>)</span> <span class="paren1">(<span class="code">- shift</span>)</span></span>)</span></span>)</span>
+          <span class="paren5">(<span class="code">r <span class="paren6">(<span class="code">ash <span class="paren1">(<span class="code">logand hex-val <span class="paren2">(<span class="code">ash deno <span class="paren3">(<span class="code">* 2 shift</span>)</span></span>)</span></span>)</span> <span class="paren1">(<span class="code">- <span class="paren2">(<span class="code">* 2 shift</span>)</span></span>)</span></span>)</span></span>)</span>
+          <span class="paren5">(<span class="code">a <span class="paren6">(<span class="code">ash <span class="paren1">(<span class="code">logand hex-val <span class="paren2">(<span class="code">ash deno <span class="paren3">(<span class="code">* 3 shift</span>)</span></span>)</span></span>)</span> <span class="paren1">(<span class="code">- <span class="paren2">(<span class="code">* 3 shift</span>)</span></span>)</span></span>)</span></span>)</span></span>)</span>
+      <span class="paren4">(<span class="code">apply #'color:make-rgb
+             <span class="paren5">(<span class="code">mapcar #'<span class="paren6">(<span class="code"><i><span class="symbol">lambda</span></i> <span class="paren1">(<span class="code">f</span>)</span> <span class="paren1">(<span class="code">/ <span class="paren2">(<span class="code">float f</span>)</span> deno</span>)</span></span>)</span>
+                     <span class="paren6">(<span class="code">list r g b <span class="paren1">(<span class="code">+ <span class="paren2">(<span class="code">- a</span>)</span> deno</span>)</span></span>)</span></span>)</span></span>)</span></span>)</span></span>)</span></span>)</span></span></code></pre>
+
+<h3>Why I Write This</h3>
+
+<p>Improving personal ability is always a hard odyssey. This is what I've done at the first time I got this requirement:</p>
+
+<pre><code><span class="code"><span class="paren1">(<span class="code"><i><span class="symbol">defun</span></i> hex-to-spec <span class="paren2">(<span class="code">hex</span>)</span>
+  <span class="paren2">(<span class="code"><i><span class="symbol">let</span></i> <span class="paren3">(<span class="code"><span class="paren4">(<span class="code">hex-list <span class="paren5">(<span class="code">case <span class="paren6">(<span class="code">length hex</span>)</span>
+                    <span class="paren6">(<span class="code">4 <span class="paren1">(<span class="code">mapcar #'string
+                               <span class="paren2">(<span class="code"><i><span class="symbol">loop</span></i> for i from 1 to 3 collect <span class="paren3">(<span class="code">schar hex i</span>)</span></span>)</span></span>)</span></span>)</span>
+                    <span class="paren6">(<span class="code">7 <span class="paren1">(<span class="code"><i><span class="symbol">loop</span></i> for i from 1 to 5 by 2
+                             collect <span class="paren2">(<span class="code">subseq hex i <span class="paren3">(<span class="code">+ 2 i</span>)</span></span>)</span></span>)</span></span>)</span>
+                    <span class="paren6">(<span class="code">5 <span class="paren1">(<span class="code">nconc <span class="paren2">(<span class="code">mapcar #'string
+                                      <span class="paren3">(<span class="code"><i><span class="symbol">loop</span></i> for i from 2 to 4 collect <span class="paren4">(<span class="code">schar hex i</span>)</span></span>)</span></span>)</span>
+                              <span class="paren2">(<span class="code">list <span class="paren3">(<span class="code">string <span class="paren4">(<span class="code">aref hex 1</span>)</span></span>)</span></span>)</span></span>)</span></span>)</span>
+                    <span class="paren6">(<span class="code">9 <span class="paren1">(<span class="code">nconc <span class="paren2">(<span class="code"><i><span class="symbol">loop</span></i> for i from 3 to 7 by 2
+                                    collect <span class="paren3">(<span class="code">subseq hex i <span class="paren4">(<span class="code">+ 2 i</span>)</span></span>)</span></span>)</span>
+                              <span class="paren2">(<span class="code">list <span class="paren3">(<span class="code">subseq hex 1 3</span>)</span></span>)</span></span>)</span></span>)</span></span>)</span></span>)</span>
+        <span class="paren4">(<span class="code">deno <span class="paren5">(<span class="code"><i><span class="symbol">if</span></i> <span class="paren6">(<span class="code">&lt; <span class="paren1">(<span class="code">length hex</span>)</span> 6</span>)</span> 15 255</span>)</span></span>)</span></span>)</span>
+    <span class="paren3">(<span class="code">apply #'color:make-rgb
+           <span class="paren4">(<span class="code">mapcar #'<span class="paren5">(<span class="code"><i><span class="symbol">lambda</span></i> <span class="paren6">(<span class="code">f</span>)</span> <span class="paren6">(<span class="code">/ <span class="paren1">(<span class="code">float f</span>)</span> deno</span>)</span></span>)</span>
+                   <span class="paren5">(<span class="code">mapcar #'<span class="paren6">(<span class="code"><i><span class="symbol">lambda</span></i> <span class="paren1">(<span class="code">s</span>)</span> <span class="paren1">(<span class="code">parse-integer s <span class="keyword">:radix</span> 16</span>)</span></span>)</span>
+                           hex-list</span>)</span></span>)</span></span>)</span></span>)</span></span>)</span></span></code></pre>
+
+<p>That's surely awful. But after weeks of exploration, I can finally write a more elegant code above. I hope this post can be a documentary of my growing, telling me that I can do better with my endeavour. And you, I hope you can do it too.</p>
+
+        </div>
+        <p style="color: #5A5A5A;">Wrote at 2024-03-09T22:36:18.000000Z;</p>
+        <p style="color: #5A5A5A;">Last Update: 2024-04-20T02:54:47.000000Z;</p>
+        <a href="#Interpreting Hex Colors">Back to Top</a>
+    </div>
+</div>
+
+
+      </div>
+
+      <div class="sidebar">
+        
+        <div style="text-align: center; padding: 1em; background-color: #000000; color: #EEEEEE">
+          <div class="logo"></div>
+          <h2>AprCorner</h2>
+          <h4>Lisp, Literature, Sister, Trans and Life</h4>
+        </div>
+        <div class="author-block">
+          <h3>by @April Simone</h3>
+          <h5>Lisper &amp; Autism &amp; Transfeminine, DID with May</h5>
+          <div style="display: flex; flex-flow: row wrap; justify-content: space-evenly;">
+            <a href="https://twitter.com/apr_simone">
+              <svg width="1.5em" height="1.5em" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <path d="M459.4 151.7c.3 4.5 .3 9.1 .3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53 51.7 63.7 129.3 105.3 216.4 109.8-1.6-7.8-2.6-15.9-2.6-24 0-57.8 46.8-104.9 104.9-104.9 30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3z"/>
+              </svg>
+            </a>
+            <a href="https://t.me/apr_simone">
+              <svg width="1.5em" height="1.5em" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
+                <path d="M248 8C111 8 0 119 0 256S111 504 248 504 496 393 496 256 385 8 248 8zM363 176.7c-3.7 39.2-19.9 134.4-28.1 178.3-3.5 18.6-10.3 24.8-16.9 25.4-14.4 1.3-25.3-9.5-39.3-18.7-21.8-14.3-34.2-23.2-55.3-37.2-24.5-16.1-8.6-25 5.3-39.5 3.7-3.8 67.1-61.5 68.3-66.7 .2-.7 .3-3.1-1.2-4.4s-3.6-.8-5.1-.5q-3.3 .7-104.6 69.1-14.8 10.2-26.9 9.9c-8.9-.2-25.9-5-38.6-9.1-15.5-5-27.9-7.7-26.8-16.3q.8-6.7 18.5-13.7 108.4-47.2 144.6-62.3c68.9-28.6 83.2-33.6 92.5-33.8 2.1 0 6.6 .5 9.6 2.9a10.5 10.5 0 0 1 3.5 6.7A43.8 43.8 0 0 1 363 176.7z"/>
+              </svg>
+            </a>
+            <a href="https://github.com/apr3vau">
+              <svg width="1.5em" height="1.5em" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
+                <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3 .3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5 .3-6.2 2.3zm44.2-1.7c-2.9 .7-4.9 2.6-4.6 4.9 .3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3 .7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3 .3 2.9 2.3 3.9 1.6 1 3.6 .7 4.3-.7 .7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3 .7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3 .7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/>
+              </svg>
+            </a>
+            <a href="mailto:apr3vau@outlook.com">
+              <svg width="1.5em" height="1.5em" fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+  </body>
+</html>
