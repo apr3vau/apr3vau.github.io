@@ -120,52 +120,40 @@
 <div class="postblock-outer">
     <div class="postblock">
         <div class="post-title-line">
-            <h2 id="Using Non-Focus Interface in CAPI" class="post-title">
-              <a href="/Using-Non-Focus-Interface-in-CAPI.html" style="color: #000000;">Using Non-Focus Interface in CAPI</a>
+            <h2 id="About" class="post-title">
+              <a href="/About.html" style="color: #000000;">About</a>
             </h2>
-            <div style="padding-top: 1em;">
-                
-                <a class="post-tag" href="/tag/Programming">Programming</a>
-                
-                <a class="post-tag" href="/tag/Common Lisp">Common Lisp</a>
-                
-                <a class="post-tag" href="/tag/Lispworks">Lispworks</a>
-                
-                <a class="post-tag" href="/tag/GUI">GUI</a>
-                
-            </div>
         </div>
         <div class="post-content">
-            <p>Lispworks' manual said non-focus window is some kind of window that not taking focus, but in fact any interface can work without focus anyway :)... I just treat it as a way to raise windows without system's decorations like border &amp; action buttons. We will get it done using floating divs in web-based UI, but they usually have some limitations like not support to display out of the DOM, and such a native window can hold these situation very well. That's the advantage of native framework.</p>
-
-<p>LW has exported 2 interface to raise non-focus window, one is <code>capi:prompt-with-list-non-focus</code>, to raise a list panel, and another is <code>capi:display-non-focus-message</code>, to raise a display pane with certain string. Besides these two types, there is an internal <code>capi::display-non-focus-editor-pane</code> can be used - although lacking in arglist description, but can still work with those known arguments from other two functions. The non-focus editor pane is exactly what have been used in the <code>Function Arglist Displayer</code>.</p>
-
-<p>And, we can raise an arbitrary interface by directly instanciate a <code>capi::non-focus-interface</code>. Two initargs <code>:previous-x</code> and <code>:previous-y</code> are necessary as the relative position of its owner. The <code>gesture-callbacks</code> should be used for <code>capi:non-focus-maybe-capture-gesture</code>. Interface arguments like window-styles can be used to make more precise effects.</p>
-
-<pre><code><span class="code"><span class="paren1">(<span class="code">capi:display
- <span class="paren2">(<span class="code">make-instance 'capi::non-focus-interface
-                <span class="keyword">:window-styles</span> '<span class="paren3">(<span class="code"><span class="keyword">:borderless</span></span>)</span>
-                <span class="keyword">:layout</span> <span class="paren3">(<span class="code">make-instance
-                         'capi:column-layout
-                         <span class="keyword">:description</span>
-                         <span class="paren4">(<span class="code">list <span class="paren5">(<span class="code">make-instance 'capi:display-pane
-                                              <span class="keyword">:text</span> <span class="string">"test"</span></span>)</span></span>)</span></span>)</span>
-                <span class="keyword">:previous-x</span> 0 <span class="keyword">:previous-y</span> 0</span>)</span>
- <span class="keyword">:owner</span> <span class="paren2">(<span class="code">editor:window-text-pane <span class="paren3">(<span class="code">editor:current-window</span>)</span></span>)</span></span>)</span></span></code></pre>
-
-<p>The documented way to update items in <code>non-focus-list-interface</code> is using <code>list-updater</code>, this function should return new items or <code>destroy</code>, and the interface will be repositioned and resized to fit its children using its <code>positioning-function</code>. It's a undocumented keyword for all of those raising functions. CAPI have given an default one of this slot, so we can know this function should take the interface itself, then directly move it, with no return value (probably). But we can also set the top-level interface geometries of the interface directly.  Sometimes the coordinates need to be converted from the screen to the owner, and <code>capi:convert-relative-position</code> can be used.</p>
-
-<p>Sometimes there are still some effect not satisfy our needs, like the selection of <code>non-focus-list-interface</code> will be reset after items update. Directly accessing the components using <code>capi::non-focus-interface-list-panel</code> etc. can be used to achieve complex manipulates.</p>
-
-<p>The redisplay of <code>non-focus-interface</code> have been forced to happen in the owner's process, and this may cause annoying laggings of UI process sometimes. I will just start a thread to prepare all datas needed, then calling for GUI update using <code>apply-in-pane-process</code>.  Sometimes it's still useless when we raise/move window rapidly, and the native handler itself is laggy enough though. Attaching the non-focus interface to a standalone process may works.</p>
-
-        </div>
-        <p style="color: #5A5A5A;">Wrote at 2024-02-23T05:07:41.000000Z;</p>
-        <p style="color: #5A5A5A;">Last Update: 2024-04-20T02:46:18.000000Z;</p>
-        <a href="#Using Non-Focus Interface in CAPI" style="color: #5A5A5A;">Back to Top</a>
-    </div>
+            <div style="text-align: center">
+欲寄彩笺兼尺素，山长水阔知何处
+<br />
+<br />四月 & 五月
+<br />可能的自闭症与分离型人格障碍
+<br />人称代词可能多次变换
+<br />
+<br />不称职的妹妹 & 不称职的恋人
+<br />
+<br />请远离我
 </div>
 
+<hr/>
+
+<div style="text-align: center">
+ASD & DID
+<br />Transfeminine & Polyamorous
+<br />
+<br />Unqualified Sister & Unqualified Lover
+<br />
+<br />Please away from me
+<br />
+<br />April & May
+</div>
+
+        </div>
+        <a href="#About" style="color: #5A5A5A;">Back to Top</a>
+    </div>
+</div>
 
       </div>
 
