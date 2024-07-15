@@ -9,7 +9,7 @@
   <link href="https://apr3vau.github.io/atom.xml" rel="self"/>
   <link href="https://apr3vau.github.io/"/>
   <updated>
-    2024-04-23T01:12:06.114017Z</updated>
+    2024-07-15T21:02:33.919334+08:00</updated>
   <id>
     https://apr3vau.github.io/</id>
   <author>
@@ -23,9 +23,9 @@
     <id>
       https://apr3vau.github.io/A_Trivial_Method_To_Render_Material_Icons_in_CAPI.html</id>
     <published>
-      2024-04-11T12:02:21.000000Z</published>
+      2024-04-11T20:02:21.000000+08:00</published>
     <updated>
-      2024-04-20T01:57:24.000000Z</updated>
+      2024-04-20T09:57:26.000000+08:00</updated>
     <summary>
       The Lispworks toolset and whole Common Lisp economy is lacking a way to
       render SVG in a standalone and reliable way, and there's also not a exist
@@ -40,9 +40,9 @@
     <id>
       https://apr3vau.github.io/Interpreting-Hex-Colors.html</id>
     <published>
-      2024-03-09T22:36:18.000000Z</published>
+      2024-03-10T06:36:18.000000+08:00</published>
     <updated>
-      2024-04-20T02:54:47.000000Z</updated>
+      2024-04-20T10:54:48.000000+08:00</updated>
     <summary>
       I usually have to convert hex code to Lispworks' color-spec. And here's
       some interesting ways to separate color components from hex code in Lisp.
@@ -57,9 +57,9 @@
     <id>
       https://apr3vau.github.io/TDoV-2024.html</id>
     <published>
-      2024-03-31T12:56:17.000000Z</published>
+      2024-03-31T20:56:17.000000+08:00</published>
     <updated>
-      2024-04-20T01:57:18.000000Z</updated>
+      2024-04-20T09:57:20.000000+08:00</updated>
     <summary>
       Happy Transgender Day of Visibility!~ Being a Chinese transgirl for year
       and half, I'm here, in proud and firm, for all of you. ![Happy
@@ -72,9 +72,9 @@
     <id>
       https://apr3vau.github.io/Trivial-Spreadsheet-for-modifying-Lispworks-Editor.html</id>
     <published>
-      2024-02-12T09:45:54.000000Z</published>
+      2024-02-12T17:45:54.000000+08:00</published>
     <updated>
-      2024-04-20T01:57:09.000000Z</updated>
+      2024-04-20T09:57:10.000000+08:00</updated>
     <summary>
       ## Preface The programming interface of Lispworks Editor is not as easily
       accessible as Emacs, mostly because its exported symbols are too trivial,
@@ -89,14 +89,29 @@
     <id>
       https://apr3vau.github.io/Using-Non-Focus-Interface-in-CAPI.html</id>
     <published>
-      2024-02-23T05:07:41.000000Z</published>
+      2024-02-23T13:07:41.000000+08:00</published>
     <updated>
-      2024-04-20T02:46:18.000000Z</updated>
+      2024-04-20T10:46:20.000000+08:00</updated>
     <summary>
       Lispworks' manual said non-focus window is some kind of window that not
       taking focus, but in fact any interface can work without focus anyway
       :)... I just treat it as a way to raise windows without system's
       decorations like border &amp; action buttons. We will get it done using
       floating divs in web-b...</summary>
+  </entry>
+  <entry>
+    <title>
+      药物记录-喹硫平</title>
+    <link href="https://apr3vau.github.io/药物记录-喹硫平.html"/>
+    <id>
+      https://apr3vau.github.io/药物记录-喹硫平.html</id>
+    <published>
+      2024-07-15T22:32:00.000000+08:00</published>
+    <updated>
+      2024-07-15T21:02:31.000000+08:00</updated>
+    <summary>
+      12号我们去武精卫看望住院的间月，我们顺便去找医生调了下药——原本在吃劳拉西泮，用来安眠及抗焦虑，但吃了一个多月后已经有耐药性了，睡眠再次变得很差，于是想换一种安眠药。武精卫的医生推荐了曲唑酮、阿戈美拉汀和喹硫平，我们猜测是医生不想给我们开精二类药物，宁可用喹硫平的副作用来安眠。我们最后选择了喹硫平，医生给我们下了100mg/d的医嘱，但给我们开的是200mg无法掰开的缓释片，于是我们干脆擅自加量到200mg了。
+      吃上喹硫平以后顺便把原先抗精分的齐拉西酮断掉了，现在每天早晨吃文拉法辛，晚上吃喹硫平，吃药的流程简单了很多。
+      第一天的药效最猛烈，一觉睡了十四个小时，醒来后还是有困困晕晕的...</summary>
   </entry>
 </feed>
